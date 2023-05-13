@@ -1,32 +1,81 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include "queue.h"
 
-# Precompiled Headers
-*.gch
-*.pch
+int main(int argc, char *argv[]) {
+  std::cout << price(1000) << " " << 1000_kzt << " " << 1000_tt << "\n";
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+  std::cout << 5 * 500_kzt << "\n";
+  std::cout << 300_tt + 400_kzt << "\n";
+  std::cout << (250_tt == 200_tt + 50_tt) << "\n";
+  std::cout << order("tiramisu", 1790_tt) << "\n";
+  std::cout << order("medowik", 1590_tt, 3) << "\n";
 
-# Fortran module files
-*.mod
-*.smod
+  queue q;
+  std::cout << q << "\n";
+  q.push({"espresso", 750_tt});
+  std::cout << q << "\n";
+  q.push({"esterhazy", 1690_kzt});
+  std::cout << q << "\n";
+  q.push({"latte macchiato", 1170_tt, 2});
+  std::cout << q << "\n";
+  std::cout << "\n";
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+  while (q.size() > 3) {
+    auto s = q.peek();
+    std::cout << s << "\n";
+    q.pop();
+  }
 
-# Executables
-*.exe
-*.out
-*.app
+  queue many_orders = {
+      {"cake", 500_tt}, {"cappuccino", 1170_tt}, {"pavlova", 1990_tt}};
+
+  q = many_orders;
+
+  while (q.size()) {
+    std::cout << q.peek() << "\n";
+    q.pop();
+  }
+
+  std::cout << "\n";
+
+  queue test1;
+  std::cout << "test1 front: " << test1.front << "; back: " << test1.back
+            << "\n";
+  std::cout << "test1 size: " << test1.size() << "\n";
+  test1.push({"panini", 800_tt, 3});
+  std::cout << "test1: " << test1 << "\n";
+  std::cout << "test1 size: " << test1.size() << "\n";
+  queue test2 = test1;
+  std::cout << "test2 size: " << test2.size() << "\n";
+  test1.push({"ice_latte", 900_tt, 2});
+  std::cout << "test2: " << test2 << "\n";
+  std::cout << "test2 size: " << test2.size() << "\n";
+  std::cout << "\n";
+  queue test3 = {
+      {"cake", 500_tt}, {"cappuccino", 1170_tt}, {"pavlova", 1990_tt}};
+  std::cout << "test3: " << test3 << "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  std::cout << "\n";
+  test3 = test3;
+  std::cout << "test3 (self-assignment): " << test3 << "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  test3.push({"espresso", 750_tt});
+  std::cout << "test3 (push): " << test3 << "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  std::cout << "\n";
+  test3.pop();
+  std::cout << "test3 (pop): " << test3 << "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  std::cout << "\n";
+  test3.reset(2);
+  std::cout << "test3 (reset(2)): " << test3 << "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  std::cout << "\n";
+  test2.clear();
+  std::cout << "test2 (clear): " << test2 << "\n";
+  std::cout << "test2 size: " << test2.size() << "\n";
+  std::cout << "test2 (empty): " <<test2.empty()<< "\n";
+  std::cout << "test3 (empty): " <<test3.empty()<< "\n";
+  std::cout << "test3 size: " << test3.size() << "\n";
+  return 0;
+}
